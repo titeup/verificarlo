@@ -124,7 +124,8 @@ static inline double _noise_binary64(const int exp, rng_state_t *rng_state) {
  */
 #define _INTERFLOP_OP_CALL_CANCELL(TYPE, OP_NAME, OP_TYPE, GEN_CLAUSE)         \
   static void _interflop_##OP_NAME##_##TYPE(                                   \
-      TYPE a, TYPE b, _GEN_CANCELL_ATTR(GEN_CLAUSE) TYPE *c, void *context) {  \
+      TYPE a, TYPE b, _GEN_CANCELL_ATTR(GEN_CLAUSE) TYPE *c,                   \
+      __attribute__((unused)) void *context) {                                 \
     *c = a OP_TYPE b;                                                          \
     _GEN_CANCELL_CLAUSE(GEN_CLAUSE)                                            \
   }

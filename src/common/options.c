@@ -94,13 +94,13 @@ static void _set_seed(struct drand48_data *random_state, const bool choose_seed,
 
 /* Outputs 64-bit unsigned integer r (0 <= r < 2^64) */
 static uint64_t _generate_random_uint64(struct drand48_data *random_state) {
-  uint64_t tmp_rand1, tmp_rand2, tmp_rand;
+  int64_t tmp_rand1, tmp_rand2, tmp_rand;
 
   lrand48_r(random_state, &tmp_rand1);
   lrand48_r(random_state, &tmp_rand2);
-  tmp_rand = (tmp_rand1 << 32) + tmp_rand2;
+  tmp_rand = (tmp_rand1 << 32ULL) + tmp_rand2;
 
-  return tmp_rand;
+  return (uint64_t)tmp_rand;
 }
 
 /* Output a floating point number r (0.0 < r < 1.0) */
@@ -128,7 +128,7 @@ void _init_rng_state_struct(rng_state_t *rng_state, bool choose_seed,
 
 /* Get a new identifier for the calling thread */
 /* Generic threads can have inconsistent identifiers, assigned by the system, */
-/* we therefore need to set an order between threads, for the case
+/* we therefore need to set an order between threads, for the case */
 /* when the seed is fixed, to insure some repeatability between executions */
 unsigned long long int _get_new_tid(pthread_mutex_t *global_tid_lock,
                                     unsigned long long int *global_tid) {
