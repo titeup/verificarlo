@@ -404,11 +404,11 @@ struct VfclibFunc : public ModulePass {
     TargetLibraryInfoWrapperPass TLIWP;
 
     FloatTy = Type::getFloatTy(M.getContext());
-    FloatPtrTy = Type::getFloatPtrTy(M.getContext());
+    FloatPtrTy = PointerType::getUnqual(M.getContext());
     DoubleTy = Type::getDoubleTy(M.getContext());
-    DoublePtrTy = Type::getDoublePtrTy(M.getContext());
+    DoublePtrTy = PointerType::getUnqual(M.getContext());
     Int8Ty = Type::getInt8Ty(M.getContext());
-    Int8PtrTy = Type::getInt8PtrTy(M.getContext());
+    Int8PtrTy = PointerType::getUnqual(M.getContext());
     Int32Ty = Type::getInt32Ty(M.getContext());
 
     Types2val[FFLOAT] = ConstantInt::get(Int32Ty, FFLOAT);
